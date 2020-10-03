@@ -1,5 +1,7 @@
 {
   "name": "tic-tac-toe",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
