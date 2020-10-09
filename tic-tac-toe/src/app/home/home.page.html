@@ -1,29 +1,29 @@
 <ion-header [translucent]="true" class="md">
   <ion-toolbar>
-    <ion-title align="center">
+    <ion-title>
       Tic-Tac-Toe
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" align="center" class="md">
+<ion-content [fullscreen]="true" class="md">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
   <div id="container">
-    <ion-button (click)="callback(0)" id="0" fill="outline"></ion-button>
-    <ion-button (click)="callback(1)" id="1" fill="outline"></ion-button>
-    <ion-button (click)="callback(2)" id="2" fill="outline"></ion-button>
+    <ion-button (click)="callback('00')" id="00" fill="outline"></ion-button>
+    <ion-button (click)="callback('01')" id="01" fill="outline"></ion-button>
+    <ion-button (click)="callback('02')" id="02" fill="outline"></ion-button>
     <br>
-    <ion-button (click)="callback(3)" id="3" fill="outline"></ion-button>
-    <ion-button (click)="callback(4)" id="4" fill="outline"></ion-button>
-    <ion-button (click)="callback(5)" id="5" fill="outline"></ion-button>
+    <ion-button (click)="callback('10')" id="10" fill="outline"></ion-button>
+    <ion-button (click)="callback('11')" id="11" fill="outline"></ion-button>
+    <ion-button (click)="callback('12')" id="12" fill="outline"></ion-button>
     <br>
-    <ion-button (click)="callback(6)" id="6" fill="outline"></ion-button>
-    <ion-button (click)="callback(7)" id="7" fill="outline"></ion-button>
-    <ion-button (click)="callback(8)" id="8" fill="outline"></ion-button>
+    <ion-button (click)="callback('20')" id="20" fill="outline"></ion-button>
+    <ion-button (click)="callback('21')" id="21" fill="outline"></ion-button>
+    <ion-button (click)="callback('22')" id="22" fill="outline"></ion-button>
   </div>
 </ion-content>
 <ion-footer class="md">
