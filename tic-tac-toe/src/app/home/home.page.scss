@@ -23,6 +23,11 @@
   text-decoration: none;
 }
 
+ion-title, ion-content{
+  margin: 0 auto;
+  text-align: center;
+}
+
 ion-header{
   --ion-background-color: rgba(107, 107, 107, 0.8);
   //--ion-text-color: #ffffff;
