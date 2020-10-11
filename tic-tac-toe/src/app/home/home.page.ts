@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { Subscription } from "rxjs";
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +13,36 @@ export class HomePage {
   data: [string[], string[], string[]];
   gameOver: boolean;
   scores: { X: number, O: number, T: number };
+  subscription: Subscription;
+  lastTimeBackPress: number;
 
-  constructor() {
+  constructor(
+      private platform: Platform,
+      public toastController: ToastController
+  ) {
     this.human = true;
     this.data = [['', '', ''],
                  ['', '', ''],
                  ['', '', '']];
     this.gameOver = false;
     this.scores = {X: -1, O: 1, T: 0};
+    this.lastTimeBackPress = 0;
+  }
+
+  ionViewDidEnter() {
+    const timePeriodToExit = 1500;
+    this.subscription = this.platform.backButton.subscribe(async () => {
+      if (new Date().getTime() - this.lastTimeBackPress < timePeriodToExit) {
+        navigator['app'].exitApp();
+      } else {
+        const toast = await this.toastController.create({
+          message: 'Press again to exit',
+          duration: 1500
+        });
+        await toast.present();
+        this.lastTimeBackPress = new Date().getTime();
+      }
+    });
   }
 
   move(id: string) {
