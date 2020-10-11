@@ -17,7 +17,7 @@ export class HomePage {
                  ['', '', ''],
                  ['', '', '']];
     this.gameOver = false;
-    this.scores = {X: -10, O: 10, T: 0};
+    this.scores = {X: -1, O: 1, T: 0};
   }
 
   move(id: string) {
