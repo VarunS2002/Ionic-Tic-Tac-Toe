@@ -6,55 +6,198 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  f: number;
+  human: boolean;
   data: [string[], string[], string[]];
   gameOver: boolean;
-  ids: string[];
+  scores: { X: number, O: number, T: number };
 
   constructor() {
-    this.f = 0;
+    this.human = true;
     this.data = [['', '', ''],
                  ['', '', ''],
                  ['', '', '']];
     this.gameOver = false;
+    this.scores = {X: -10, O: 10, T: 0};
   }
 
-  callback(id: string) {
+  move(id: string) {
+    if (document.getElementById('startGame').innerHTML === 'Start AI') {
+      document.getElementById('startGame').innerHTML = 'Restart Game';
+    }
     if (this.gameOver) {
       return;
     }
-    if (this.f === 0) {
+    if (this.human) {
       if (document.getElementById(id).innerHTML === '') {
         document.getElementById(id).innerHTML = 'X';
-        this.data[Number((id.substr(0,1)))][Number(id.substr(1,2))] = 'X';
-        this.f += 1;
-      }
-    } else if (this.f === 1) {
-      if (document.getElementById(id).innerHTML === '') {
-        document.getElementById(id).innerHTML = 'O';
-        this.data[Number((id.substr(0,1)))][Number(id.substr(1,2))] = 'O';
-        this.f -= 1;
+        this.data[Number(id.substr(0, 1))][Number(id.substr(1, 2))] = 'X';
+        this.human = false;
+        this.winning('check')
+        if (this.gameOver) {
+          return;
+        }
       }
     }
-    this.check(id);
+    if (!this.human) {
+      this.aiTurn()
+      this.human = true;
+      this.winning('check')
+      if (this.gameOver) {
+        return;
+      }
+    }
   }
 
-  result(winner: boolean = true) {
-    if (winner) {
-      if (this.f === 0) {
-        this.alert_O();
-      } else if (this.f === 1) {
-        this.alert_X();
+  aiTurn() {
+    let bestScore = -Infinity;
+    let bestMove;
+    for (let x = 0; x < 3; x++) {
+      for (let y = 0; y < 3; y++) {
+        if (this.data[x][y] === '') {
+          this.data[x][y] = 'O';
+          let score = this.minimax(false);
+          this.data[x][y] = '';
+          if (score > bestScore) {
+            bestScore = score;
+            bestMove = {x, y};
+          }
+        }
       }
+    }
+    this.data[bestMove.x][bestMove.y] = 'O';
+    document.getElementById(String(bestMove.x) + String(bestMove.y)).innerHTML = 'O';
+  }
+
+  minimax(isMaximizing: boolean): number {
+    let result = this.winning('minimax')
+    if (result !== null) {
+      return this.scores[result];
+    }
+    if (isMaximizing) {
+      let bestScore = -Infinity;
+      for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 3; y++) {
+          if (this.data[x][y] === '') {
+            this.data[x][y] = 'O';
+            let score = this.minimax(false)
+            this.data[x][y] = '';
+            bestScore = Math.max(score, bestScore);
+          }
+        }
+      }
+      return bestScore;
     } else {
-      this.alert_draw();
+      let bestScore = Infinity;
+      for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 3; y++) {
+          if (this.data[x][y] === '') {
+            this.data[x][y] = 'X';
+            let score = this.minimax(true)
+            this.data[x][y] = '';
+            bestScore = Math.min(score, bestScore);
+          }
+        }
+      }
+      return bestScore;
     }
-    this.gameOver = true;
   }
 
-  new_game() {
-    this.f = 0;
-    this.data = [['', '', ''], ['', '', ''], ['', '', '']];
+
+  winning(mode: string) {
+    let player;
+    let availableSpots = 0;
+    if (mode === 'minimax') {
+      player = 'X';
+      if (this.data[0][0] === this.data[0][1] && this.data[0][1] === this.data[0][2] && this.data[0][2] === player ||
+          this.data[1][0] === this.data[1][1] && this.data[1][1] === this.data[1][2] && this.data[1][2] === player ||
+          this.data[2][0] === this.data[2][1] && this.data[2][1] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[0][0] === this.data[1][0] && this.data[1][0] === this.data[2][0] && this.data[2][0] === player ||
+          this.data[0][1] === this.data[1][1] && this.data[1][1] === this.data[2][1] && this.data[2][1] === player ||
+          this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[2][0] === this.data[1][1] && this.data[1][1] === this.data[0][2] && this.data[0][2] === player) {
+        return 'X';
+      }
+      player = 'O';
+      if (this.data[0][0] === this.data[0][1] && this.data[0][1] === this.data[0][2] && this.data[0][2] === player ||
+          this.data[1][0] === this.data[1][1] && this.data[1][1] === this.data[1][2] && this.data[1][2] === player ||
+          this.data[2][0] === this.data[2][1] && this.data[2][1] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[0][0] === this.data[1][0] && this.data[1][0] === this.data[2][0] && this.data[2][0] === player ||
+          this.data[0][1] === this.data[1][1] && this.data[1][1] === this.data[2][1] && this.data[2][1] === player ||
+          this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[2][0] === this.data[1][1] && this.data[1][1] === this.data[0][2] && this.data[0][2] === player) {
+        return 'O';
+      }
+      for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 3; y++) {
+          if (this.data[x][y] === '') {
+            availableSpots++;
+          }
+        }
+      }
+      if (availableSpots === 0) {
+        return 'T';
+      }
+      return null;
+    } else if (mode === 'check') {
+      player = 'X';
+      if (this.data[0][0] === this.data[0][1] && this.data[0][1] === this.data[0][2] && this.data[0][2] === player ||
+          this.data[1][0] === this.data[1][1] && this.data[1][1] === this.data[1][2] && this.data[1][2] === player ||
+          this.data[2][0] === this.data[2][1] && this.data[2][1] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[0][0] === this.data[1][0] && this.data[1][0] === this.data[2][0] && this.data[2][0] === player ||
+          this.data[0][1] === this.data[1][1] && this.data[1][1] === this.data[2][1] && this.data[2][1] === player ||
+          this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[2][0] === this.data[1][1] && this.data[1][1] === this.data[0][2] && this.data[0][2] === player) {
+        this.alertX()
+        this.gameOver = true;
+        return;
+      }
+      player = 'O';
+      if (this.data[0][0] === this.data[0][1] && this.data[0][1] === this.data[0][2] && this.data[0][2] === player ||
+          this.data[1][0] === this.data[1][1] && this.data[1][1] === this.data[1][2] && this.data[1][2] === player ||
+          this.data[2][0] === this.data[2][1] && this.data[2][1] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[0][0] === this.data[1][0] && this.data[1][0] === this.data[2][0] && this.data[2][0] === player ||
+          this.data[0][1] === this.data[1][1] && this.data[1][1] === this.data[2][1] && this.data[2][1] === player ||
+          this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2] && this.data[2][2] === player ||
+          this.data[2][0] === this.data[1][1] && this.data[1][1] === this.data[0][2] && this.data[0][2] === player) {
+        this.alertO()
+        this.gameOver = true;
+        return;
+      }
+      for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 3; y++) {
+          if (this.data[x][y] === '') {
+            availableSpots++;
+          }
+        }
+      }
+      if (availableSpots === 0) {
+        this.alertT()
+        this.gameOver = true;
+        return;
+      }
+    }
+  }
+
+  startGame() {
+    if (document.getElementById('startGame').innerHTML === 'Start AI') {
+      document.getElementById('startGame').innerHTML = 'Restart Game';
+      this.aiTurn()
+    }
+    else if (document.getElementById('startGame').innerHTML === 'Restart Game') {
+      this.restartGame()
+      document.getElementById('startGame').innerHTML = 'Start AI';
+    }
+  }
+
+  restartGame() {
+    this.human = true;
+    this.data = [['', '', ''],
+                 ['', '', ''],
+                 ['', '', '']];
     this.gameOver = false;
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
@@ -63,7 +206,7 @@ export class HomePage {
     }
   }
 
-  alert_draw() {
+  alertT() {
     const alert = document.createElement('ion-alert');
     alert.cssClass = 'my-custom-class';
     alert.header = 'Game Over';
@@ -74,131 +217,25 @@ export class HomePage {
     return alert.present();
   }
 
-  alert_O() {
+  alertO() {
     const alert = document.createElement('ion-alert');
     alert.cssClass = 'my-custom-class';
     alert.header = 'Game Over';
-    alert.message = 'O won';
+    alert.message = 'You Lost';
     alert.buttons = ['OK'];
 
     document.body.appendChild(alert);
     return alert.present();
   }
 
-  alert_X() {
+  alertX() {
     const alert = document.createElement('ion-alert');
     alert.cssClass = 'my-custom-class';
     alert.header = 'Game Over';
-    alert.message = 'X won';
+    alert.message = 'You won';
     alert.buttons = ['OK'];
 
     document.body.appendChild(alert);
     return alert.present();
-  }
-
-  check(id: string) {
-    if (this.gameOver) {
-      return;
-    }
-    if (id === '00') {
-      if (this.data[0][0] === this.data[0][1] && this.data[0][1] === this.data[0][2]) {
-        this.result();
-        return;
-      } else if (this.data[0][0] === this.data[1][0] && this.data[1][0] === this.data[2][0]) {
-        this.result();
-        return;
-      } else if (this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2]) {
-        this.result();
-        return;
-      }
-    } else if (id === '01') {
-      if (this.data[0][1] === this.data[1][1] && this.data[1][1] === this.data[2][1]) {
-        this.result();
-        return;
-      } else if (this.data[0][0] === this.data[0][1] && this.data[0][1] === this.data[0][2]) {
-        this.result();
-        return;
-      }
-    } else if (id === '02') {
-      if (this.data[0][0] === this.data[0][1] && this.data[0][1] === this.data[0][2]) {
-        this.result();
-        return;
-      } else if (this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2]) {
-        this.result();
-        return;
-      } else if (this.data[0][2] === this.data[1][1] && this.data[1][1] === this.data[2][0]) {
-        this.result();
-        return;
-      }
-    } else if (id === '10') {
-      if (this.data[0][0] === this.data[1][0] && this.data[1][0] === this.data[2][0]) {
-        this.result();
-        return;
-      } else if (this.data[1][0] === this.data[1][1] && this.data[1][1] === this.data[1][2]) {
-        this.result();
-        return;
-      }
-    } else if (id === '11') {
-      if (this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2]) {
-        this.result();
-        return;
-      } else if (this.data[0][1] === this.data[1][1] && this.data[1][1] === this.data[2][1]) {
-        this.result();
-        return;
-      } else if (this.data[0][2] === this.data[1][1] && this.data[1][1] === this.data[2][0]) {
-        this.result();
-        return;
-      } else if (this.data[1][0] === this.data[1][1] && this.data[1][1] === this.data[1][2]) {
-        this.result();
-        return;
-      }
-
-    } else if (id === '12') {
-      if (this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2]) {
-        this.result();
-        return;
-      } else if (this.data[1][0] === this.data[1][1] && this.data[1][1] === this.data[1][2]) {
-        this.result();
-        return;
-      }
-    } else if (id === '20') {
-      if (this.data[0][0] === this.data[1][0] && this.data[1][0] === this.data[2][0]) {
-        this.result();
-        return;
-      } else if (this.data[0][2] === this.data[1][1] && this.data[1][1] === this.data[2][0]) {
-        this.result();
-        return;
-      } else if (this.data[2][0] === this.data[2][1] && this.data[2][1] === this.data[2][2]) {
-        this.result();
-        return;
-      }
-    } else if (id === '21') {
-      if (this.data[2][0] === this.data[2][1] && this.data[2][1] === this.data[2][2]) {
-        this.result();
-        return;
-      } else if (this.data[0][1] === this.data[1][1] && this.data[1][1] === this.data[2][1]) {
-        this.result();
-        return;
-      }
-    } else if (id === '22') {
-      if (this.data[2][0] === this.data[2][1] && this.data[2][1] === this.data[2][2]) {
-        this.result();
-        return;
-      } else if (this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2]) {
-        this.result();
-        return;
-      } else if (this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2]) {
-        this.result();
-        return;
-      }
-    }
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        if (this.data[x][y] === '') {
-            return;
-        }
-      }
-    }
-    this.result(false);
   }
 }
