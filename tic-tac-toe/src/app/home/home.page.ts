@@ -39,7 +39,7 @@ export class HomePage {
   }
 
   move(id: string) {
-    if (document.getElementById('startGame').innerHTML === 'Start AI') {
+    if (document.getElementById('startGame').innerHTML === 'Start') {
       document.getElementById('startGame').innerHTML = 'Restart Game';
     }
     if (this.gameOver) {
@@ -212,7 +212,7 @@ export class HomePage {
   }
 
   startGame() {
-    if (document.getElementById('startGame').innerHTML === 'Start AI') {
+    if (document.getElementById('startGame').innerHTML === 'Start') {
       document.getElementById('startGame').innerHTML = 'Restart Game';
       this.aiTurn()
     }
@@ -233,7 +233,7 @@ export class HomePage {
       }
     }
     if (this.mode==='PvC') {
-        document.getElementById('startGame').innerHTML = 'Start AI';
+        document.getElementById('startGame').innerHTML = 'Start';
     }
     else {
         document.getElementById('startGame').innerHTML = 'Restart Game';
