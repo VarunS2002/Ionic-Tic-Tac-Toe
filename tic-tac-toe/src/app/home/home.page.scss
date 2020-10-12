@@ -25,6 +25,7 @@
 
 ion-header {
   --ion-background-color: rgba(107, 107, 107, 0.8);
+  height: 55px;
 }
 
 ion-title, ion-content {
@@ -84,4 +85,5 @@ ion-footer {
 
 ion-footer ion-button {
   height: 55px;
+  text-transform: none;
 }

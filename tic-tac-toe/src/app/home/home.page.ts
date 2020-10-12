@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Subscription } from "rxjs";
-import { ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,39 +10,32 @@ import { ToastController } from '@ionic/angular';
 })
 export class HomePage {
   human: boolean;
+  mode: string;
   data: [string[], string[], string[]];
   gameOver: boolean;
   scores: { X: number, O: number, T: number };
   subscription: Subscription;
-  lastTimeBackPress: number;
 
   constructor(
       private platform: Platform,
-      public toastController: ToastController
+      public alertController: AlertController
   ) {
     this.human = true;
+    this.mode = 'PvC';
     this.data = [['', '', ''],
                  ['', '', ''],
                  ['', '', '']];
     this.gameOver = false;
     this.scores = {X: -1, O: 1, T: 0};
-    this.lastTimeBackPress = 0;
   }
 
   ionViewDidEnter() {
-    const timePeriodToExit = 1500;
-    this.subscription = this.platform.backButton.subscribe(async () => {
-      if (new Date().getTime() - this.lastTimeBackPress < timePeriodToExit) {
-        navigator['app'].exitApp();
-      } else {
-        const toast = await this.toastController.create({
-          message: 'Press again to exit',
-          duration: 1500
-        });
-        await toast.present();
-        this.lastTimeBackPress = new Date().getTime();
-      }
-    });
+      this.subscription = this.platform.backButton.subscribe(async () => {
+        await this.alertExit() });
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 
   move(id: string) {
@@ -63,14 +56,25 @@ export class HomePage {
         }
       }
     }
-    if (!this.human) {
-      this.aiTurn()
-      this.human = true;
+    else if (!this.human) {
+        if (this.mode === 'PvP') {
+            if (document.getElementById(id).innerHTML === '') {
+                document.getElementById(id).innerHTML = 'O';
+                this.data[Number(id.substr(0, 1))][Number(id.substr(1, 2))] = 'O';
+                this.human = true;
+            }
+        }
+    }
+    if (this.mode==='PvC') {
+        if (!this.human) {
+            this.aiTurn()
+            this.human = true;
+        }
+    }
       this.winning('check')
       if (this.gameOver) {
         return;
       }
-    }
   }
 
   aiTurn() {
@@ -214,11 +218,10 @@ export class HomePage {
     }
     else if (document.getElementById('startGame').innerHTML === 'Restart Game') {
       this.restartGame()
-      document.getElementById('startGame').innerHTML = 'Start AI';
     }
   }
 
-  restartGame() {
+  restartGame(event: any = null) {
     this.human = true;
     this.data = [['', '', ''],
                  ['', '', ''],
@@ -229,38 +232,92 @@ export class HomePage {
         document.getElementById(String(x) + String(y)).innerHTML = '';
       }
     }
+    if (this.mode==='PvC') {
+        document.getElementById('startGame').innerHTML = 'Start AI';
+    }
+    else {
+        document.getElementById('startGame').innerHTML = 'Restart Game';
+    }
+    if (event!==null){
+        setTimeout(() => {
+            event.target.complete();
+        }, 250);
+    }
   }
 
-  alertT() {
-    const alert = document.createElement('ion-alert');
-    alert.cssClass = 'my-custom-class';
-    alert.header = 'Game Over';
-    alert.message = 'Draw';
-    alert.buttons = ['OK'];
+  changeMode() {
+        if (document.getElementById('mode').innerHTML === 'PvC') {
+            this.mode = 'PvP';
+            document.getElementById('mode').innerHTML = 'PvP';
+        }
+        else {
+            this.mode = 'PvC'
+            document.getElementById('mode').innerHTML = 'PvC';
+        }
+        this.restartGame()
+    }
 
-    document.body.appendChild(alert);
-    return alert.present();
+  async alertT() {
+    const alert = await this.alertController.create({
+      cssClass: 'alert-game-over',
+      header: 'Game Over',
+      message: 'Draw',
+      buttons: ['OK'],
+    })
+    await alert.present();
   }
 
-  alertO() {
-    const alert = document.createElement('ion-alert');
-    alert.cssClass = 'my-custom-class';
-    alert.header = 'Game Over';
-    alert.message = 'You Lost';
-    alert.buttons = ['OK'];
-
-    document.body.appendChild(alert);
-    return alert.present();
+  async alertO() {
+    let message: string;
+    if (this.mode==='PvC') {
+      message = 'You Lost';
+    }
+    else {
+      message = 'O Won';
+    }
+    const alert = await this.alertController.create({
+      cssClass : 'alert-game-over',
+      header : 'Game Over',
+      message: message,
+      buttons : ['OK']
+  })
+    await alert.present();
   }
 
-  alertX() {
-    const alert = document.createElement('ion-alert');
-    alert.cssClass = 'my-custom-class';
-    alert.header = 'Game Over';
-    alert.message = 'You won';
-    alert.buttons = ['OK'];
+  async alertX() {
+    let message: string;
+    if (this.mode==='PvC') {
+      message = 'You Won';
+    }
+    else {
+      message = 'X Won';
+    }
+    const alert = await this.alertController.create({
+    cssClass : 'alert-game-over',
+    header : 'Game Over',
+    message: message,
+    buttons : ['OK']
+    })
+    await alert.present();
+  }
 
-    document.body.appendChild(alert);
-    return alert.present();
+  async alertExit() {
+      const alert = await this.alertController.create({
+        cssClass: 'alert-exit',
+        header: 'Exit Game',
+        message: 'Are you sure you want to exit the game ?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler: () => {
+              navigator['app'].exitApp();
+            }
+          }, {
+            text: 'No',
+            role: 'cancel'
+          }
+        ]
+      })
+      await alert.present();
   }
 }

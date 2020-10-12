@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" class="md">
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Tic-Tac-Toe
@@ -6,7 +6,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="md">
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="restartGame($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div id="container">
     <ion-button (click)="move('00')" id="00" fill="outline"></ion-button>
     <ion-button (click)="move('01')" id="01" fill="outline"></ion-button>
@@ -21,6 +24,13 @@
     <ion-button (click)="move('22')" id="22" fill="outline"></ion-button>
   </div>
 </ion-content>
-<ion-footer class="md">
-  <ion-button expand="full" class="ion-no-margin" (click)="startGame()" id="startGame">Start AI</ion-button>
+<ion-footer>
+  <ion-row>
+    <ion-col class="ion-no-padding">
+      <ion-button expand="full" class="ion-no-margin" (click)="changeMode()" id="mode">PvC</ion-button>
+    </ion-col>
+    <ion-col class="ion-no-padding">
+      <ion-button expand="full" class="ion-no-margin" (click)="startGame()" id="startGame">Start AI</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-footer>
