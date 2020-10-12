@@ -308,12 +308,12 @@ export class HomePage {
         message: 'Are you sure you want to exit the game ?',
         buttons: [
           {
-            text: 'Yes',
+            text: 'YES',
             handler: () => {
               navigator['app'].exitApp();
             }
           }, {
-            text: 'No',
+            text: 'NO',
             role: 'cancel'
           }
         ]
