@@ -2,6 +2,7 @@ import { Component, Renderer2 } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Subscription } from "rxjs";
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomePage {
   constructor(
       private platform: Platform,
       public alertController: AlertController,
-      private renderer: Renderer2
+      private renderer: Renderer2,
+      private storage: Storage
   ) {
     this.human = true;
     this.mode = 'PvC';
@@ -30,7 +32,7 @@ export class HomePage {
     this.gameOver = false;
     this.scores = {X: -1, O: 1, T: 0};
     this.theme = 'dark';
-    this.toggleTheme( true);
+    this.toggleTheme(true);
   }
 
   ionViewDidEnter() {
@@ -326,17 +328,37 @@ export class HomePage {
       await alert.present();
   }
 
-  toggleTheme(init: boolean = false) {
-    if (init) {
-      this.renderer.setAttribute(document.body,'color-theme','dark');
+  toggleTheme(init:boolean, set: string = null) {
+    if (init){
+      this.storage.get('theme').then((result) => {
+        if (result!=null) {
+          this.theme = result;
+          this.toggleTheme(false, result)
+        }
+        else {
+          this.toggleTheme( false, 'dark');
+        }
+      });
     }
-    if (this.theme==='dark'){
-      this.renderer.setAttribute(document.body,'color-theme','light');
-      this.theme = 'light';
-    }
-    else {
+    else if (set==='dark'){
       this.renderer.setAttribute(document.body,'color-theme','dark')
       this.theme = 'dark';
+      this.storage.set('theme', 'dark');
+    }
+    else if (set==='light'){
+      this.renderer.setAttribute(document.body,'color-theme','light');
+      this.theme = 'light';
+      this.storage.set('theme', 'light');
+    }
+    else if (this.theme==='light'){
+      this.renderer.setAttribute(document.body,'color-theme','dark')
+      this.theme = 'dark';
+      this.storage.set('theme', 'dark');
+    }
+    else if (this.theme==='dark') {
+      this.renderer.setAttribute(document.body,'color-theme','light');
+      this.theme = 'light';
+      this.storage.set('theme', 'light');
     }
   }
 }
