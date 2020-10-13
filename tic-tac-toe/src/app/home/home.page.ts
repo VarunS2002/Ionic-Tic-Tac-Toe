@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Subscription } from "rxjs";
 import { AlertController } from '@ionic/angular';
@@ -15,10 +15,12 @@ export class HomePage {
   gameOver: boolean;
   scores: { X: number, O: number, T: number };
   subscription: Subscription;
+  theme: string;
 
   constructor(
       private platform: Platform,
-      public alertController: AlertController
+      public alertController: AlertController,
+      private renderer: Renderer2
   ) {
     this.human = true;
     this.mode = 'PvC';
@@ -27,11 +29,14 @@ export class HomePage {
                  ['', '', '']];
     this.gameOver = false;
     this.scores = {X: -1, O: 1, T: 0};
+    this.theme = 'dark';
+    this.toggleTheme( true);
   }
 
   ionViewDidEnter() {
       this.subscription = this.platform.backButton.subscribe(async () => {
         await this.alertExit() });
+      this.toggleTheme(true);
   }
 
   ionViewWillLeave() {
@@ -319,5 +324,19 @@ export class HomePage {
         ]
       })
       await alert.present();
+  }
+
+  toggleTheme(init: boolean = false) {
+    if (init) {
+      this.renderer.setAttribute(document.body,'color-theme','dark');
+    }
+    if (this.theme==='dark'){
+      this.renderer.setAttribute(document.body,'color-theme','light');
+      this.theme = 'light';
+    }
+    else {
+      this.renderer.setAttribute(document.body,'color-theme','dark')
+      this.theme = 'dark';
+    }
   }
 }
