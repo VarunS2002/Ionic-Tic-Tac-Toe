@@ -10,13 +10,13 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  human: boolean;
-  mode: string;
   data: [string[], string[], string[]];
+  mode: string;
+  human: boolean;
   gameOver: boolean;
   scores: { X: number, O: number, T: number };
-  subscription: Subscription;
   theme: string;
+  subscription: Subscription;
 
   constructor(
       private platform: Platform,
@@ -24,23 +24,25 @@ export class HomePage {
       private renderer: Renderer2,
       private storage: Storage
   ) {
-    this.human = true;
-    this.mode = 'PvC';
     this.data = [['', '', ''],
                  ['', '', ''],
                  ['', '', '']];
+    this.mode = 'PvC';
+    this.human = true;
     this.gameOver = false;
     this.scores = {X: -1, O: 1, T: 0};
     this.theme = 'dark';
-    this.toggleTheme(true);
+    this.setTheme(true);
   }
 
+  // noinspection JSUnusedGlobalSymbols
   ionViewDidEnter() {
       this.subscription = this.platform.backButton.subscribe(async () => {
         await this.alertExit() });
-      this.toggleTheme(true);
+      this.setTheme(true);
   }
 
+  // noinspection JSUnusedGlobalSymbols
   ionViewWillLeave() {
     this.subscription.unsubscribe();
   }
@@ -57,7 +59,7 @@ export class HomePage {
         document.getElementById(id).innerHTML = 'X';
         this.data[Number(id.substr(0, 1))][Number(id.substr(1, 2))] = 'X';
         this.human = false;
-        this.winning('check')
+        this.winner('check');
         if (this.gameOver) {
           return;
         }
@@ -74,14 +76,24 @@ export class HomePage {
     }
     if (this.mode==='PvC') {
         if (!this.human) {
-            this.aiTurn()
+            this.aiTurn();
             this.human = true;
         }
     }
-      this.winning('check')
+      this.winner('check')
       if (this.gameOver) {
         return;
       }
+  }
+
+  startGame() {
+    if (document.getElementById('startGame').innerHTML === 'Start') {
+      document.getElementById('startGame').innerHTML = 'Restart Game';
+      this.aiTurn();
+    }
+    else if (document.getElementById('startGame').innerHTML === 'Restart Game') {
+      this.restartGame();
+    }
   }
 
   aiTurn() {
@@ -104,8 +116,8 @@ export class HomePage {
     document.getElementById(String(bestMove.x) + String(bestMove.y)).innerHTML = 'O';
   }
 
-  minimax(isMaximizing: boolean): number {
-    let result = this.winning('minimax')
+  minimax(isMaximizing: boolean, alpha: number = -Infinity, beta: number = Infinity): number {
+    let result = this.winner('minimax')
     if (result !== null) {
       return this.scores[result];
     }
@@ -115,9 +127,13 @@ export class HomePage {
         for (let y = 0; y < 3; y++) {
           if (this.data[x][y] === '') {
             this.data[x][y] = 'O';
-            let score = this.minimax(false)
+            let score = this.minimax(false, alpha, beta);
             this.data[x][y] = '';
             bestScore = Math.max(score, bestScore);
+            alpha = Math.max(alpha, score);
+            if (beta <= alpha) {
+              break;
+            }
           }
         }
       }
@@ -128,9 +144,13 @@ export class HomePage {
         for (let y = 0; y < 3; y++) {
           if (this.data[x][y] === '') {
             this.data[x][y] = 'X';
-            let score = this.minimax(true)
+            let score = this.minimax(true, alpha, beta);
             this.data[x][y] = '';
             bestScore = Math.min(score, bestScore);
+            beta = Math.min(beta,score);
+            if (beta <= alpha) {
+              break;
+            }
           }
         }
       }
@@ -139,7 +159,7 @@ export class HomePage {
   }
 
 
-  winning(mode: string) {
+  winner(mode: string) {
     let player;
     let availableSpots = 0;
     if (mode === 'minimax') {
@@ -186,7 +206,8 @@ export class HomePage {
           this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2] && this.data[2][2] === player ||
           this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2] && this.data[2][2] === player ||
           this.data[2][0] === this.data[1][1] && this.data[1][1] === this.data[0][2] && this.data[0][2] === player) {
-        this.alertX()
+        // noinspection JSIgnoredPromiseFromCall
+        this.alertX();
         this.gameOver = true;
         return;
       }
@@ -199,7 +220,8 @@ export class HomePage {
           this.data[0][2] === this.data[1][2] && this.data[1][2] === this.data[2][2] && this.data[2][2] === player ||
           this.data[0][0] === this.data[1][1] && this.data[1][1] === this.data[2][2] && this.data[2][2] === player ||
           this.data[2][0] === this.data[1][1] && this.data[1][1] === this.data[0][2] && this.data[0][2] === player) {
-        this.alertO()
+        // noinspection JSIgnoredPromiseFromCall
+        this.alertO();
         this.gameOver = true;
         return;
       }
@@ -211,28 +233,19 @@ export class HomePage {
         }
       }
       if (availableSpots === 0) {
-        this.alertT()
+        // noinspection JSIgnoredPromiseFromCall
+        this.alertT();
         this.gameOver = true;
         return;
       }
     }
   }
 
-  startGame() {
-    if (document.getElementById('startGame').innerHTML === 'Start') {
-      document.getElementById('startGame').innerHTML = 'Restart Game';
-      this.aiTurn()
-    }
-    else if (document.getElementById('startGame').innerHTML === 'Restart Game') {
-      this.restartGame()
-    }
-  }
-
   restartGame(event: any = null) {
-    this.human = true;
     this.data = [['', '', ''],
                  ['', '', ''],
                  ['', '', '']];
+    this.human = true;
     this.gameOver = false;
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
@@ -258,11 +271,49 @@ export class HomePage {
             document.getElementById('mode').innerHTML = 'PvP';
         }
         else {
-            this.mode = 'PvC'
+            this.mode = 'PvC';
             document.getElementById('mode').innerHTML = 'PvC';
         }
-        this.restartGame()
+        this.restartGame();
     }
+
+  setTheme(init:boolean, set: string = null) {
+    if (init) {
+      this.storage.get('theme').then((result) => {
+        if (result!=null) {
+          this.theme = result;
+          this.setTheme(false, result);
+        }
+        else {
+          this.setTheme( false, 'dark');
+        }
+      });
+    }
+    else if (set==='dark'){
+      this.renderer.setAttribute(document.body,'color-theme','dark');
+      this.theme = 'dark';
+      // noinspection JSIgnoredPromiseFromCall
+      this.storage.set('theme', 'dark');
+    }
+    else if (set==='light'){
+      this.renderer.setAttribute(document.body,'color-theme','light');
+      this.theme = 'light';
+      // noinspection JSIgnoredPromiseFromCall
+      this.storage.set('theme', 'light');
+    }
+    else if (this.theme==='light'){
+      this.renderer.setAttribute(document.body,'color-theme','dark');
+      this.theme = 'dark';
+      // noinspection JSIgnoredPromiseFromCall
+      this.storage.set('theme', 'dark');
+    }
+    else if (this.theme==='dark') {
+      this.renderer.setAttribute(document.body,'color-theme','light');
+      this.theme = 'light';
+      // noinspection JSIgnoredPromiseFromCall
+      this.storage.set('theme', 'light');
+    }
+  }
 
   async alertT() {
     const alert = await this.alertController.create({
@@ -270,7 +321,7 @@ export class HomePage {
       header: 'Game Over',
       message: 'Draw',
       buttons: ['OK'],
-    })
+    });
     await alert.present();
   }
 
@@ -287,7 +338,7 @@ export class HomePage {
       header : 'Game Over',
       message: message,
       buttons : ['OK']
-  })
+  });
     await alert.present();
   }
 
@@ -304,7 +355,7 @@ export class HomePage {
     header : 'Game Over',
     message: message,
     buttons : ['OK']
-    })
+    });
     await alert.present();
   }
 
@@ -324,41 +375,7 @@ export class HomePage {
             role: 'cancel'
           }
         ]
-      })
-      await alert.present();
-  }
-
-  toggleTheme(init:boolean, set: string = null) {
-    if (init){
-      this.storage.get('theme').then((result) => {
-        if (result!=null) {
-          this.theme = result;
-          this.toggleTheme(false, result)
-        }
-        else {
-          this.toggleTheme( false, 'dark');
-        }
       });
-    }
-    else if (set==='dark'){
-      this.renderer.setAttribute(document.body,'color-theme','dark')
-      this.theme = 'dark';
-      this.storage.set('theme', 'dark');
-    }
-    else if (set==='light'){
-      this.renderer.setAttribute(document.body,'color-theme','light');
-      this.theme = 'light';
-      this.storage.set('theme', 'light');
-    }
-    else if (this.theme==='light'){
-      this.renderer.setAttribute(document.body,'color-theme','dark')
-      this.theme = 'dark';
-      this.storage.set('theme', 'dark');
-    }
-    else if (this.theme==='dark') {
-      this.renderer.setAttribute(document.body,'color-theme','light');
-      this.theme = 'light';
-      this.storage.set('theme', 'light');
-    }
+      await alert.present();
   }
 }
