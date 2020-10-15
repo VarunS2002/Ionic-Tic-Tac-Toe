@@ -1,11 +1,16 @@
 # Ionic-Tic-Tac-Toe
 
 <!--## [Downloads](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases)-->
+## [Play Online](https://varuns2002.github.io/Ionic-Tic-Tac-Toe/)
 >[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Build: passing](https://img.shields.io/badge/build-passing-brightgreen)
 
 This is a fully fledged 2 or 1 player tic-tac-toe game written in TypeScript, HTML and SCSS using Ionic Framework which uses minimax algorithm with alpha beta pruning for Player vs Computer mode.
 It can be exported to Android, iOS, Windows, PWA or a website.
+
+## Hosted on:
+ 
+>https://varuns2002.github.io/Ionic-Tic-Tac-Toe/ 
 
 ## Requirements:
 
