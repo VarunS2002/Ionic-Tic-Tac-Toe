@@ -16,6 +16,7 @@ export class HomePage {
   gameOver: boolean;
   scores: { X: number, O: number, T: number };
   theme: string;
+  isBrowser: boolean;
   subscription: Subscription;
 
   constructor(
@@ -33,6 +34,7 @@ export class HomePage {
     this.scores = {X: -1, O: 1, T: 0};
     this.theme = 'dark';
     this.setTheme(true);
+    this.isBrowser = this.platform.is('desktop') || this.platform.is('mobileweb');
   }
 
   // noinspection JSUnusedGlobalSymbols

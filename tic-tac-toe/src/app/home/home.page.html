@@ -1,11 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="!isBrowser">
       <ion-button id="back" (click)="alertExit()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Tic-Tac-Toe</ion-title>
+    <ion-title *ngIf="isBrowser" style="margin-left: 50px">Tic-Tac-Toe</ion-title>
+    <ion-title *ngIf="!isBrowser">Tic-Tac-Toe</ion-title>
     <ion-buttons slot="end">
       <ion-button id="theme" (click)="setTheme(false)">
         <ion-icon name="contrast-outline"></ion-icon>
