@@ -15,6 +15,9 @@ export class HomePage {
   human: boolean;
   gameOver: boolean;
   scores: { X: number, O: number, T: number };
+  scoreX: number;
+  scoreO: number;
+  scoreT: number;
   theme: string;
   isBrowser: boolean;
   subscription: Subscription;
@@ -32,6 +35,9 @@ export class HomePage {
     this.human = true;
     this.gameOver = false;
     this.scores = {X: -1, O: 1, T: 0};
+    this.scoreX = 0;
+    this.scoreO = 0;
+    this.scoreT = 0;
     this.theme = 'dark';
     this.setTheme(true);
     this.isBrowser = this.platform.is('desktop') || this.platform.is('mobileweb');
@@ -50,8 +56,8 @@ export class HomePage {
   }
 
   move(id: string) {
-    if (document.getElementById('startGame').innerHTML === 'Start') {
-      document.getElementById('startGame').innerHTML = 'Restart Game';
+    if (document.getElementById('start-game').innerHTML === 'Start') {
+      document.getElementById('start-game').innerHTML = 'Restart Game';
     }
     if (this.gameOver) {
       return;
@@ -59,6 +65,9 @@ export class HomePage {
     if (this.human) {
       if (document.getElementById(id).innerHTML === '') {
         document.getElementById(id).innerHTML = 'X';
+        if (this.mode === 'PvP') {
+          document.getElementById('next-label').innerHTML = 'O';
+        }
         this.data[Number(id.substr(0, 1))][Number(id.substr(1, 2))] = 'X';
         this.human = false;
         this.winner('check');
@@ -71,6 +80,7 @@ export class HomePage {
         if (this.mode === 'PvP') {
             if (document.getElementById(id).innerHTML === '') {
                 document.getElementById(id).innerHTML = 'O';
+              document.getElementById('next-label').innerHTML = 'X';
                 this.data[Number(id.substr(0, 1))][Number(id.substr(1, 2))] = 'O';
                 this.human = true;
             }
@@ -89,11 +99,11 @@ export class HomePage {
   }
 
   startGame() {
-    if (document.getElementById('startGame').innerHTML === 'Start') {
-      document.getElementById('startGame').innerHTML = 'Restart Game';
+    if (document.getElementById('start-game').innerHTML === 'Start') {
+      document.getElementById('start-game').innerHTML = 'Restart Game';
       this.aiTurn();
     }
-    else if (document.getElementById('startGame').innerHTML === 'Restart Game') {
+    else if (document.getElementById('start-game').innerHTML === 'Restart Game') {
       this.restartGame();
     }
   }
@@ -210,6 +220,9 @@ export class HomePage {
           this.data[2][0] === this.data[1][1] && this.data[1][1] === this.data[0][2] && this.data[0][2] === player) {
         // noinspection JSIgnoredPromiseFromCall
         this.alertX();
+        this.scoreX+=1;
+        document.getElementById('score-x-label').innerHTML = String(this.scoreX);
+        document.getElementById('next-label').innerHTML = '-';
         this.gameOver = true;
         return;
       }
@@ -224,6 +237,9 @@ export class HomePage {
           this.data[2][0] === this.data[1][1] && this.data[1][1] === this.data[0][2] && this.data[0][2] === player) {
         // noinspection JSIgnoredPromiseFromCall
         this.alertO();
+        this.scoreO+=1;
+        document.getElementById('score-o-label').innerHTML = String(this.scoreO);
+        document.getElementById('next-label').innerHTML = '-';
         this.gameOver = true;
         return;
       }
@@ -237,6 +253,9 @@ export class HomePage {
       if (availableSpots === 0) {
         // noinspection JSIgnoredPromiseFromCall
         this.alertT();
+        this.scoreT+=1;
+        document.getElementById('score-t-label').innerHTML = String(this.scoreT);
+        document.getElementById('next-label').innerHTML = '-';
         this.gameOver = true;
         return;
       }
@@ -255,28 +274,43 @@ export class HomePage {
       }
     }
     if (this.mode==='PvC') {
-        document.getElementById('startGame').innerHTML = 'Start';
+        document.getElementById('start-game').innerHTML = 'Start';
+        document.getElementById('next-label').innerHTML = '-';
     }
     else {
-        document.getElementById('startGame').innerHTML = 'Restart Game';
+        document.getElementById('start-game').innerHTML = 'Restart Game';
+        document.getElementById('next-label').innerHTML = 'X';
     }
-    if (event!==null){
-        setTimeout(() => {
-            event.target.complete();
-        }, 250);
+    if (event!==null) {
+      this.resetScores();
+      setTimeout(() => {
+          event.target.complete();
+      }, 250);
     }
+  }
+  
+  resetScores() {
+    this.scoreX = 0;
+    this.scoreO = 0;
+    this.scoreT = 0;
+    document.getElementById('score-x-label').innerHTML = String(this.scoreX);
+    document.getElementById('score-o-label').innerHTML = String(this.scoreO);
+    document.getElementById('score-t-label').innerHTML = String(this.scoreT);
   }
 
   changeMode() {
-        if (document.getElementById('mode').innerHTML === 'PvC') {
+        if (document.getElementById('mode-label').innerHTML === 'PvC') {
             this.mode = 'PvP';
-            document.getElementById('mode').innerHTML = 'PvP';
+            document.getElementById('mode-label').innerHTML = 'PvP';
+            document.getElementById('next-label').innerHTML = 'X';
         }
         else {
             this.mode = 'PvC';
-            document.getElementById('mode').innerHTML = 'PvC';
+            document.getElementById('mode-label').innerHTML = 'PvC';
+            document.getElementById('next-label').innerHTML = '-';
         }
         this.restartGame();
+        this.resetScores();
     }
 
   setTheme(init:boolean, set: string = null) {

@@ -77,6 +77,20 @@ ion-content ion-button {
   --border-width: 0px 0px 0 0;
 }
 
+#labels {
+  position: absolute;
+  bottom: 10%;
+  width: 100%;
+  ion-card {
+    margin: 2px;
+    padding: 0 !important;
+    ion-card-header {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+}
+
 ion-footer {
   height: 55px;
 }

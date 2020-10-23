@@ -32,14 +32,58 @@
     <ion-button (click)="move('21')" id="21" fill="outline"></ion-button>
     <ion-button (click)="move('22')" id="22" fill="outline"></ion-button>
   </div>
+  <div id="labels">
+    <ion-row class="ion-no-padding ion-no-margin">
+      <ion-col class="ion-no-padding ion-no-margin">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Mode</ion-card-subtitle>
+            <ion-card-title id="mode-label">PvC</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-no-padding ion-no-margin">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>X</ion-card-subtitle>
+            <ion-card-title id="score-x-label">0</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-no-padding ion-no-margin">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>O</ion-card-subtitle>
+            <ion-card-title id="score-o-label">0</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-no-padding ion-no-margin">
+        <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Draws</ion-card-subtitle>
+          <ion-card-title id="score-t-label">0</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+      <ion-col class="ion-no-padding ion-no-margin">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Next</ion-card-subtitle>
+            <ion-card-title id="next-label">-</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>
 <ion-footer>
   <ion-row>
     <ion-col class="ion-no-padding">
-      <ion-button expand="full" class="ion-no-margin" (click)="changeMode()" id="mode">PvC</ion-button>
+      <ion-button expand="full" class="ion-no-margin" (click)="changeMode()" id="change-mode">Change Mode</ion-button>
     </ion-col>
     <ion-col class="ion-no-padding">
-      <ion-button expand="full" class="ion-no-margin" (click)="startGame()" id="startGame">Start</ion-button>
+      <ion-button expand="full" class="ion-no-margin" (click)="startGame()" id="start-game">Start</ion-button>
     </ion-col>
   </ion-row>
 </ion-footer>
