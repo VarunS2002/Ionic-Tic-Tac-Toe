@@ -31,7 +31,7 @@ export class HomePage {
     this.data = [['', '', ''],
                  ['', '', ''],
                  ['', '', '']];
-    this.mode = 'PvC';
+    this.mode = '1P';
     this.human = true;
     this.gameOver = false;
     this.scores = {X: -1, O: 1, T: 0};
@@ -65,7 +65,7 @@ export class HomePage {
     if (this.human) {
       if (document.getElementById(id).innerHTML === '') {
         document.getElementById(id).innerHTML = 'X';
-        if (this.mode === 'PvP') {
+        if (this.mode === '2P') {
           document.getElementById('next-label').innerHTML = 'O';
         }
         this.data[Number(id.substr(0, 1))][Number(id.substr(1, 2))] = 'X';
@@ -77,7 +77,7 @@ export class HomePage {
       }
     }
     else if (!this.human) {
-        if (this.mode === 'PvP') {
+        if (this.mode === '2P') {
             if (document.getElementById(id).innerHTML === '') {
                 document.getElementById(id).innerHTML = 'O';
               document.getElementById('next-label').innerHTML = 'X';
@@ -86,7 +86,7 @@ export class HomePage {
             }
         }
     }
-    if (this.mode==='PvC') {
+    if (this.mode==='1P') {
         if (!this.human) {
             this.aiTurn();
             this.human = true;
@@ -273,7 +273,7 @@ export class HomePage {
         document.getElementById(String(x) + String(y)).innerHTML = '';
       }
     }
-    if (this.mode==='PvC') {
+    if (this.mode==='1P') {
         document.getElementById('start-game').innerHTML = 'Start';
         document.getElementById('next-label').innerHTML = '-';
     }
@@ -299,14 +299,14 @@ export class HomePage {
   }
 
   changeMode() {
-        if (document.getElementById('mode-label').innerHTML === 'PvC') {
-            this.mode = 'PvP';
-            document.getElementById('mode-label').innerHTML = 'PvP';
+        if (document.getElementById('mode-label').innerHTML === '1P') {
+            this.mode = '2P';
+            document.getElementById('mode-label').innerHTML = '2P';
             document.getElementById('next-label').innerHTML = 'X';
         }
         else {
-            this.mode = 'PvC';
-            document.getElementById('mode-label').innerHTML = 'PvC';
+            this.mode = '1P';
+            document.getElementById('mode-label').innerHTML = '1P';
             document.getElementById('next-label').innerHTML = '-';
         }
         this.restartGame();
@@ -363,7 +363,7 @@ export class HomePage {
 
   async alertO() {
     let message: string;
-    if (this.mode==='PvC') {
+    if (this.mode==='1P') {
       message = 'You Lost';
     }
     else {
@@ -380,7 +380,7 @@ export class HomePage {
 
   async alertX() {
     let message: string;
-    if (this.mode==='PvC') {
+    if (this.mode==='1P') {
       message = 'You Won';
     }
     else {
