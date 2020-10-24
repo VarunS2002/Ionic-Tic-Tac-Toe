@@ -5,8 +5,8 @@
 >[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Build: passing](https://img.shields.io/badge/build-passing-brightgreen)
 
-This is a fully fledged 2 or 1 player tic-tac-toe game written in TypeScript, HTML and SCSS using Ionic Framework which uses minimax algorithm with alpha beta pruning for Player vs Computer mode.
-It can be exported to Android, iOS, Windows, PWA or a website.
+This is a fully fledged 2 or 1 player tic-tac-toe game written in TypeScript, HTML and SCSS using Ionic Framework which uses minimax algorithm with alpha beta pruning for Single Player mode.
+It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 ## Hosted on:
  
@@ -44,31 +44,39 @@ It can be exported to Android, iOS, Windows, PWA or a website.
 
 ## Features:
 
--2 modes namely Player vs Computer (PvC) and Player vs Player (PvP)
+-2 modes namely Single Player (1P) and Multi Player (2P)
 
--Default mode is Player vs Computer
+-Default mode is Single Player
 
 -Button to change the mode
 
--In PvC mode, user always inputs X and the computer inputs O
+-Label showing current mode
+
+-In 1P mode, user always inputs X and the computer inputs O
 
 -Start Button to let Computer start first 
 
 -Uses Minimax algorithm with Alpha Beta Pruning for an unbeatable Computer
 
--In PvP mode, input X and O alternatively by clicking on the buttons in the grid
+-In 2P mode, input X and O alternatively by clicking on the buttons in the grid
 
 -First to start is X
 
+-Label showing which is the next player in 2P mode
+
 -Alert Box shows you who won or if it's a draw
 
--Button and Pull to refresh to Restart Game
+-Button to Restart Game
 
--Material Design
+-Labels showing scores of X, O and Draws
+
+-Pull to Refresh or Change Mode to reset scores and restart game
 
 -Dark theme and Light theme with toggle
 
 -Default theme on first run is Dark
+
+-Material Design
 
 -Animated Splash Screen
 
@@ -81,12 +89,12 @@ It can be exported to Android, iOS, Windows, PWA or a website.
 
 -Light Theme:
 
-![Screenshot_1](https://i.imgur.com/Kqe76Nc.png)
+![Screenshot_1](https://i.imgur.com/Eh3U9c4.png)
 
 -Dark Theme:
 
-![Screenshot_2](https://i.imgur.com/QJw1IVx.png)
+![Screenshot_2](https://i.imgur.com/fbt9aNM.png)
 
 -Winner Alert Box:
 
-![Screenshot_3](https://i.imgur.com/cPfLnvg.png)
+![Screenshot_3](https://i.imgur.com/thqxtct.png)
