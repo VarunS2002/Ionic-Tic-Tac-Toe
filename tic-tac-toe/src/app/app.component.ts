@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 })
 export class AppComponent {
   showCSSSplash = true;
-  darkSplash: boolean;
+  darkSplash = true;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
