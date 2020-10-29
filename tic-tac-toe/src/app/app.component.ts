@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { timer } from "rxjs";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,16 @@ import { timer } from "rxjs";
 })
 export class AppComponent {
   showCSSSplash = true;
+  darkSplash: boolean;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private storage: Storage
   ) {
+    this.storage.get('theme').then((result) => {
+      this.darkSplash = result !== 'light';
+    });
     this.initializeApp();
   }
 
