@@ -11,7 +11,7 @@ import { timer } from "rxjs";
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  showSplash = true;
+  showCSSSplash = true;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -24,7 +24,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      timer(2000).subscribe(() => this.showSplash = false)
+      timer(2200).subscribe(() => this.showCSSSplash = false)
     });
   }
 }
