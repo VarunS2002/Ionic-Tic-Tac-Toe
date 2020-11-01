@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -12,7 +11,7 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  showCSSSplash = true;
+  showCSSSplash = false;
   darkSplash = true;
   constructor(
     private platform: Platform,
@@ -30,7 +29,8 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      timer(2200).subscribe(() => this.showCSSSplash = false)
+      this.showCSSSplash = true;
+      timer(2200).subscribe(() => this.showCSSSplash = false);
     });
   }
 }
