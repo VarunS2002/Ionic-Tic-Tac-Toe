@@ -1,0 +1,46 @@
+ion-header {
+  height: 55px;
+}
+
+ion-title, ion-content {
+  text-align: center;
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.version {
+  color: grey;
+  margin-top: 5px;
+  margin-bottom: -10px;
+}
+
+.profile {
+  text-transform: none;
+  font-size: 15px;
+  margin-bottom: -5px;
+}
+
+
+#icon {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  img {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+.link {
+  color: dodgerblue;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 15px;
+  margin-top: -7px;
+}

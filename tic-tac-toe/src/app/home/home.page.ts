@@ -3,6 +3,9 @@ import { Platform } from '@ionic/angular';
 import { Subscription } from "rxjs";
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { MenuController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { AboutPage } from "../about/about.page";
 
 @Component({
   selector: 'app-home',
@@ -26,7 +29,9 @@ export class HomePage {
       private platform: Platform,
       public alertController: AlertController,
       private renderer: Renderer2,
-      private storage: Storage
+      private storage: Storage,
+      private menu: MenuController,
+      private modalController: ModalController
   ) {
     this.data = [['', '', ''],
                  ['', '', ''],
@@ -41,18 +46,30 @@ export class HomePage {
     this.theme = 'dark';
     this.setTheme(true);
     this.isBrowser = this.platform.is('desktop') || this.platform.is('mobileweb');
+    this.subscription = this.platform.backButton.subscribeWithPriority(10000,async () => {
+      await this.alertExit() });
   }
 
-  // noinspection JSUnusedGlobalSymbols
-  ionViewDidEnter() {
-      this.subscription = this.platform.backButton.subscribe(async () => {
-        await this.alertExit() });
-      this.setTheme(true);
-  }
-
-  // noinspection JSUnusedGlobalSymbols
-  ionViewWillLeave() {
+  menuOpened() {
     this.subscription.unsubscribe();
+    this.subscription = this.platform.backButton.subscribe(async () => {
+      await this.menu.close();
+    });
+  }
+
+  menuClosed() {
+    this.subscription.unsubscribe();
+    this.subscription = this.platform.backButton.subscribe(async () => {
+      await this.alertExit();
+    });
+  }
+
+  goTo(page: string) {
+    if (page === "about") {
+      this.subscription.unsubscribe();
+      // noinspection JSIgnoredPromiseFromCall
+      this.aboutPageModal();
+    }
   }
 
   move(id: string) {
@@ -313,44 +330,6 @@ export class HomePage {
         this.resetScores();
     }
 
-  setTheme(init:boolean, set: string = null) {
-    if (init) {
-      this.storage.get('theme').then((result) => {
-        if (result!=null) {
-          this.theme = result;
-          this.setTheme(false, result);
-        }
-        else {
-          this.setTheme( false, 'dark');
-        }
-      });
-    }
-    else if (set==='dark'){
-      this.renderer.setAttribute(document.body,'color-theme','dark');
-      this.theme = 'dark';
-      // noinspection JSIgnoredPromiseFromCall
-      this.storage.set('theme', 'dark');
-    }
-    else if (set==='light'){
-      this.renderer.setAttribute(document.body,'color-theme','light');
-      this.theme = 'light';
-      // noinspection JSIgnoredPromiseFromCall
-      this.storage.set('theme', 'light');
-    }
-    else if (this.theme==='light'){
-      this.renderer.setAttribute(document.body,'color-theme','dark');
-      this.theme = 'dark';
-      // noinspection JSIgnoredPromiseFromCall
-      this.storage.set('theme', 'dark');
-    }
-    else if (this.theme==='dark') {
-      this.renderer.setAttribute(document.body,'color-theme','light');
-      this.theme = 'light';
-      // noinspection JSIgnoredPromiseFromCall
-      this.storage.set('theme', 'light');
-    }
-  }
-
   async alertT() {
     const alert = await this.alertController.create({
       cssClass: 'alert-game-over',
@@ -393,6 +372,58 @@ export class HomePage {
     buttons : ['OK']
     });
     await alert.present();
+  }
+
+  setTheme(init:boolean, set: string = null) {
+    if (init) {
+      this.storage.get('theme').then((result) => {
+        if (result!=null) {
+          this.theme = result;
+          this.setTheme(false, result);
+        }
+        else {
+          this.setTheme( false, 'dark');
+        }
+      });
+    }
+    else if (set==='dark'){
+      this.renderer.setAttribute(document.body,'color-theme','dark');
+      this.theme = 'dark';
+      // noinspection JSIgnoredPromiseFromCall
+      this.storage.set('theme', 'dark');
+    }
+    else if (set==='light'){
+      this.renderer.setAttribute(document.body,'color-theme','light');
+      this.theme = 'light';
+      // noinspection JSIgnoredPromiseFromCall
+      this.storage.set('theme', 'light');
+    }
+    else if (this.theme==='light'){
+      this.renderer.setAttribute(document.body,'color-theme','dark');
+      this.theme = 'dark';
+      // noinspection JSIgnoredPromiseFromCall
+      this.storage.set('theme', 'dark');
+    }
+    else if (this.theme==='dark') {
+      this.renderer.setAttribute(document.body,'color-theme','light');
+      this.theme = 'light';
+      // noinspection JSIgnoredPromiseFromCall
+      this.storage.set('theme', 'light');
+    }
+  }
+
+  async aboutPageModal() {
+    const modal = await this.modalController.create({
+      component: AboutPage,
+      cssClass: 'about-page'
+    });
+    modal.onDidDismiss().then(() => {
+      this.subscription.unsubscribe();
+      this.subscription = this.platform.backButton.subscribe(async () => {
+        await this.menu.close();
+      });
+    });
+    return await modal.present();
   }
 
   async alertExit() {
