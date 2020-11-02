@@ -1,7 +1,7 @@
 # Ionic-Tic-Tac-Toe
 
-<!--## [Downloads](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases)-->
 ## [Play Online](https://varuns2002.github.io/Ionic-Tic-Tac-Toe/)
+## [Downloads](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases)
 >[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Build: passing](https://img.shields.io/badge/build-passing-brightgreen)
 
@@ -74,6 +74,8 @@ It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 -Dark theme and Light theme with toggle
 
+-About page with version and links for developer's GitHub profile, releases, README, source code, license
+
 -Default theme on first run is Dark
 
 -Material Design
@@ -89,12 +91,16 @@ It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 -Light Theme:
 
-![Screenshot_1](https://i.imgur.com/Eh3U9c4.png)
+![Light](https://i.imgur.com/C9GGYVl.png)
 
 -Dark Theme:
 
-![Screenshot_2](https://i.imgur.com/fbt9aNM.png)
+![Dark](https://i.imgur.com/i8laiKh.png)
 
 -Winner Alert Box:
 
-![Screenshot_3](https://i.imgur.com/thqxtct.png)
+![Result](https://i.imgur.com/JZwnsSI.png)
+
+-About Page:
+
+![About](https://i.imgur.com/CFVVaQF.png)
