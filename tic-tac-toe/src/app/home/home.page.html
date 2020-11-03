@@ -7,19 +7,19 @@
   <ion-content>
     <ion-item (click)="setTheme(false)" class="ion-activatable" style="margin-left: -15px">
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <ion-icon name="contrast-sharp"></ion-icon>
+      <span class="material-icons">brightness_6</span>
       <ion-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Switch Theme</ion-label>
       <ion-ripple-effect></ion-ripple-effect>
     </ion-item>
     <ion-item (click)="goTo('about')" class="ion-activatable" style="margin-left: -15px">
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <ion-icon name="help-outline"></ion-icon>
+      <span class="material-icons">info</span>
       <ion-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About</ion-label>
       <ion-ripple-effect></ion-ripple-effect>
     </ion-item>
     <ion-item *ngIf="!isBrowser" (click)="alertExit()" class="ion-activatable" style="margin-left: -15px">
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <ion-icon name="arrow-back"></ion-icon>
+      <span class="material-icons">arrow_back</span>
       <ion-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit</ion-label>
       <ion-ripple-effect></ion-ripple-effect>
     </ion-item>
