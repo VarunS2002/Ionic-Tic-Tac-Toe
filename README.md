@@ -2,8 +2,9 @@
 
 ## [Play Online](https://varuns2002.github.io/Ionic-Tic-Tac-Toe/)
 ## [Downloads](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases)
->[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+>[![APK: v1.0.0](https://img.shields.io/badge/APK-v1.0.0-brightgreen)](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases/download/1.0.0/Tic-Tac-Toe-1.0.0.apk)
 ![Build: passing](https://img.shields.io/badge/build-passing-brightgreen)
+>[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 This is a fully fledged 2 or 1 player tic-tac-toe game written in TypeScript, HTML and SCSS using Ionic Framework which uses minimax algorithm with alpha beta pruning for Single Player mode.
 It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
