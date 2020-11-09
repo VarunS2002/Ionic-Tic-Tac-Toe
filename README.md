@@ -9,15 +9,11 @@
 This is a fully fledged 2 or 1 player tic-tac-toe game written in TypeScript, HTML and SCSS using Ionic Framework which uses minimax algorithm with alpha beta pruning for Single Player mode.
 It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
-## Hosted on:
- 
->https://varuns2002.github.io/Ionic-Tic-Tac-Toe/ 
-
 ## Requirements:
 
 - [Node.js with npm](https://nodejs.org/en/download/)
 
-## Installation:
+## Building:
 
 >Steps for installing Ionic CLI and required packages
 
