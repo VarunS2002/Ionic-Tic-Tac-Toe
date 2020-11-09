@@ -10,11 +10,17 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
-    path: 'about',
-    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
-
+  {
+    path: 'about',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'licenses',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

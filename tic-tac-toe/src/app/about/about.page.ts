@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from "@ionic/angular";
+import { LicensesPage } from "../licenses/licenses.page";
 
 @Component({
   selector: 'app-about',
@@ -14,5 +15,13 @@ export class AboutPage {
   goHome() {
     // noinspection JSIgnoredPromiseFromCall
     this.modalController.dismiss();
+  }
+
+  async licensesPageModal() {
+    const modal = await this.modalController.create({
+      component: LicensesPage,
+      cssClass: 'licenses-page'
+    });
+    return await modal.present();
   }
 }
