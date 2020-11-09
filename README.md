@@ -2,7 +2,7 @@
 
 ## [Play Online](https://varuns2002.github.io/Ionic-Tic-Tac-Toe/)
 ## [Downloads](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases)
->[![APK: v1.0.0](https://img.shields.io/badge/APK-v1.0.0-brightgreen)](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases/download/1.0.0/Tic-Tac-Toe-1.0.0.apk)
+>[![APK: v1.1.0](https://img.shields.io/badge/APK-v1.1.0-brightgreen)](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases/download/1.1.0/Tic-Tac-Toe-1.1.0.apk)
 ![Build: passing](https://img.shields.io/badge/build-passing-brightgreen)
 >[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
@@ -100,4 +100,4 @@ It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 -About Page:
 
-![About](https://i.imgur.com/CFVVaQF.png)
+![About](https://i.imgur.com/9sw2YTQ.png)
