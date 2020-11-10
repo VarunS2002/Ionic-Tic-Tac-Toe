@@ -19,7 +19,7 @@ It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 ## Installation & Usage:
 
-- Can be played online in the browser. See [Play Online](#Play Online:)
+- Can be played online in the browser. See [Play Online](##play-online:)
 
 - Can be installed as a Progressive Web App on any platform. See [Use Progressive Web Apps](https://support.google.com/chrome/answer/9658361?co=GENIE.Platform%3DAndroid&hl=en)
 
