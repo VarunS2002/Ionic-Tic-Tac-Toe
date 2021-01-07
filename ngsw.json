@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1604921045596,
+  "timestamp": 1610035380114,
   "index": "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/index.html",
   "assetGroups": [
     {
@@ -11,8 +11,8 @@
         "ignoreVary": true
       },
       "urls": [
-        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/10-es2015.34e6e01b2f6b729d1df6.js",
-        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/10-es5.34e6e01b2f6b729d1df6.js",
+        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/10-es2015.ec0caeaf80f9b9a98176.js",
+        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/10-es5.ec0caeaf80f9b9a98176.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/11-es2015.db93362f2cb461f0a003.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/11-es5.db93362f2cb461f0a003.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/12-es2015.fb1a146390594b62a567.js",
@@ -118,8 +118,8 @@
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/common-es2015.5ab5fea0f8fcef4abf05.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/common-es5.5ab5fea0f8fcef4abf05.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/index.html",
-        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/main-es2015.8e5e5569c905e224be82.js",
-        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/main-es5.8e5e5569c905e224be82.js",
+        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/main-es2015.4fcd0b23050429fad5ee.js",
+        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/main-es5.4fcd0b23050429fad5ee.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/manifest.webmanifest",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-core-js-es2015.80056137ebe59535433d.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-core-js-es5.80056137ebe59535433d.js",
@@ -129,8 +129,8 @@
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-dom-es5.c126e028fed908826f89.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-es2015.d7ad1820da61cda6054a.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-es5.994f203d987f363c0b45.js",
-        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/runtime-es2015.58c1833b43d0dcc95fca.js",
-        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/runtime-es5.58c1833b43d0dcc95fca.js",
+        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/runtime-es2015.d1cd57b360fa05926c26.js",
+        "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/runtime-es5.d1cd57b360fa05926c26.js",
         "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/styles.b7fde80bb49f99cb76ac.css"
       ],
       "patterns": []
@@ -159,8 +159,8 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/10-es2015.34e6e01b2f6b729d1df6.js": "d9a7ff8e9973e588340e1b977192c080c299b2e5",
-    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/10-es5.34e6e01b2f6b729d1df6.js": "da1b17c6a5703d44493e22ce4354bd901e17e73e",
+    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/10-es2015.ec0caeaf80f9b9a98176.js": "5583677f62dc75071c9a3650e49c6efbe9499902",
+    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/10-es5.ec0caeaf80f9b9a98176.js": "6b4e0d10f0619e1d44f2573113d0320c60897e30",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/11-es2015.db93362f2cb461f0a003.js": "287d9f63373b8176389cda79dc944a757b6efbb5",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/11-es5.db93362f2cb461f0a003.js": "d93b9dee480c34af191053c27feb27125f05959f",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/12-es2015.fb1a146390594b62a567.js": "64ab114a7e72b16323b67d84b1b423a12edffa84",
@@ -275,9 +275,9 @@
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/assets/images/icon_foreground.png": "c39c21f27800d6a81b0db36462e47fd56dc0f1e8",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/common-es2015.5ab5fea0f8fcef4abf05.js": "5a08ccc29ab2883312a1ea3bbb8f9f4fdbda958f",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/common-es5.5ab5fea0f8fcef4abf05.js": "f0fedf36adae5bcd1f1b83329baf976ad472c04b",
-    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/index.html": "f73908a0983959720a22e04aa3037d5a87f31400",
-    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/main-es2015.8e5e5569c905e224be82.js": "a35ceb952bf381bb98b0973afcd8fb73a73a4417",
-    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/main-es5.8e5e5569c905e224be82.js": "8a31fdeac29b32c19a08f22e75875016831c5618",
+    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/index.html": "8b01357b57530dfc1a7431babf23ccec7c8336f2",
+    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/main-es2015.4fcd0b23050429fad5ee.js": "e4f2aa373947bbd2863c91002e8a3219a7564ec0",
+    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/main-es5.4fcd0b23050429fad5ee.js": "9195fefa718589cf4cb9232ef43290e30c689fa1",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/manifest.webmanifest": "45c5d2c763381308bb6e023da6d34e795979144d",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-core-js-es2015.80056137ebe59535433d.js": "f007c630c357ee7eeec2289a6cfc013dbcbe6fe9",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-core-js-es5.80056137ebe59535433d.js": "8531ee642b05d9e12e859babeaec61c2b1c1e57a",
@@ -287,8 +287,8 @@
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-dom-es5.c126e028fed908826f89.js": "50e795de8617f137b6640a5f3b7c432dd75900f1",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-es2015.d7ad1820da61cda6054a.js": "2d42951327cfeb6418061c4c2bac30ef0f5ab990",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/polyfills-es5.994f203d987f363c0b45.js": "d1879b70206dc9edc823e4fd272e86791674a80d",
-    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/runtime-es2015.58c1833b43d0dcc95fca.js": "849622734ec06699362095737c05c33e178b8c4a",
-    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/runtime-es5.58c1833b43d0dcc95fca.js": "2027fc6ab5988944dade310fb1c264a3ca350c2c",
+    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/runtime-es2015.d1cd57b360fa05926c26.js": "a5198902aa0bdf3d5df1f5caa05ce32161d8dddf",
+    "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/runtime-es5.d1cd57b360fa05926c26.js": "a45db1146e957115bcfc5f24f1de5002bcf45dc9",
     "https://varuns2002.github.io/Ionic-Tic-Tac-Toe/styles.b7fde80bb49f99cb76ac.css": "3d6051e4e1bccd3da013b1725ec450cfdfc2e953"
   },
   "navigationUrls": [
