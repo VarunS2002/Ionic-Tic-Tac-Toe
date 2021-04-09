@@ -23,8 +23,8 @@ export class AppComponent {
   ) {
     this.storage.get('theme').then((result) => {
       this.darkSplash = result !== 'light';
+      this.initializeApp();
     });
-    this.initializeApp();
   }
 
   initializeApp() {
