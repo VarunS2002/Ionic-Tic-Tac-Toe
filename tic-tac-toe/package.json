@@ -67,7 +67,7 @@
     "tslint": "~6.1.0",
     "typescript": "~3.9.5"
   },
-  "description": "An Ionic project",
+  "description": "A fully fledged 2 or 1 player tic-tac-toe game",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},

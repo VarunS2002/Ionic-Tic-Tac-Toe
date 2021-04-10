@@ -2,7 +2,7 @@
 <!--suppress XmlUnusedNamespaceDeclaration -->
 <widget id="com.varuns2002.ttt" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tic-Tac-Toe</name>
-    <description>A simple Tic-Tac-Toe game.</description>
+    <description>A fully fledged 2 or 1 player tic-tac-toe game</description>
     <author email="shanbhag.varun@gmail.com" href="https://github.com/VarunS2002/">VarunS2002</author>
     <content src="index.html" />
     <access origin="*" />
