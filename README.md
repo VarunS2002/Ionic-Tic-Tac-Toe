@@ -2,16 +2,17 @@
 
 ## Play Online:
 
->### [Firebase](https://tic-tac-toe-vs2002.web.app/)
+> ### [Firebase](https://tic-tac-toe-vs2002.web.app/)
 >
 >### [GitHub Pages](https://varuns2002.github.io/Ionic-Tic-Tac-Toe/)
 
 ## [Downloads](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases)
->[![APK: v1.1.1](https://img.shields.io/badge/APK-v1.1.1-brightgreen)](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases/download/1.1.1/Tic-Tac-Toe-1.1.1.apk)
-![Build: passing](https://img.shields.io/badge/build-passing-brightgreen)
->[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-This is a fully fledged 2 or 1 player tic-tac-toe game written in TypeScript, HTML and SCSS using Ionic Framework and uses Cordova for the Android app.
+> [![APK: v1.1.1](https://img.shields.io/badge/APK-v1.1.1-brightgreen)](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases/download/1.1.1/Tic-Tac-Toe-1.1.1.apk)
+> [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+This is a fully fledged 2 or 1 player tic-tac-toe game written in TypeScript, HTML and SCSS using Ionic Framework and
+uses Cordova for the Android app.
 
 This app uses minimax algorithm with alpha beta pruning for Single Player mode.
 
@@ -21,7 +22,8 @@ It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 - Can be played online in the browser. See [Play Online](#play-online)
 
-- Can be installed as a Progressive Web App on any platform. See [Use Progressive Web Apps](https://support.google.com/chrome/answer/9658361?co=GENIE.Platform%3DAndroid&hl=en)
+- Can be installed as a Progressive Web App on any platform.
+  See [Use Progressive Web Apps](https://support.google.com/chrome/answer/9658361?co=GENIE.Platform%3DAndroid&hl=en)
 
 - Can be installed as an Android app. See [Downloads](https://github.com/VarunS2002/Ionic-Tic-Tac-Toe/releases)
 
@@ -39,25 +41,25 @@ It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 3. Run `npm install`
 
--  This will install all the required packages
+- This will install all the required packages
 
->#### Steps for running on a Browser
+> #### Steps for running on a Browser
 
 1. Set current working directory to tic-tac-toe
 
-2. Run `ionic serve`  
+2. Run `ionic serve`
 
 - This will compile the program and run it on `http://localhost:8100` (port may vary) to use on your browser
 
->#### Steps for exporting to Android
+> #### Steps for exporting to Android
 
 1. Set current working directory to tic-tac-toe
 
 2. To export as an Android app run `ionic cordova build android`
 
-- This will export a debug build of the apk file which can be installed on an Android phone or emulator  
+- This will export a debug build of the apk file which can be installed on an Android phone or emulator
 
--  Minimum Android Version Required : Android 7.0 Nougat (API Level 24)
+- Minimum Android Version Required : Android 7.0 Nougat (API Level 24)
 
 ## Features:
 
@@ -71,7 +73,7 @@ It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 - In 1P mode, user always inputs X and the computer inputs O
 
-- Start Button to let Computer start first 
+- Start Button to let Computer start first
 
 - Uses Minimax algorithm with Alpha Beta Pruning for an unbeatable Computer
 
@@ -107,18 +109,16 @@ It can be exported to Android, iOS, Windows, MacOS, PWA or a Web App.
 
 ## Screenshots:
 
-- Light Theme:
+- Light Theme:<br><br>
 
-    ![Light](https://i.imgur.com/C9GGYVl.png)
+  ![Light](https://i.imgur.com/C9GGYVl.png)
 
-- Dark Theme:
 
-    ![Dark](https://i.imgur.com/i8laiKh.png)
+- Dark Theme:<br><br>
 
-- Winner Alert Box:
+  ![Dark](https://i.imgur.com/i8laiKh.png)
 
-    ![Result](https://i.imgur.com/JZwnsSI.png)
 
-- About Page:
+- Winner Alert Box:<br><br>
 
-    ![About](https://i.imgur.com/9sw2YTQ.png)
+  ![Result](https://i.imgur.com/JZwnsSI.png)
