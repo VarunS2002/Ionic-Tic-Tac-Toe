@@ -4,6 +4,8 @@
   "theme_color": "#1976d2",
   "background_color": "#121212",
   "display": "standalone",
+  "description": "A fully fledged 2 or 1 player Tic-Tac-Toe game",
+  "orientation": "portrait-primary",
   "scope": "./",
   "start_url": "./",
   "icons": [
@@ -54,6 +56,23 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/Dark_324x648.png",
+      "type": "image/png",
+      "sizes": "324x648"
+    },
+    {
+      "src": "screenshots/Light_324x648.png",
+      "type": "image/png",
+      "sizes": "324x648"
+    },
+    {
+      "src": "screenshots/Result_324x648.png",
+      "type": "image/png",
+      "sizes": "324x648"
     }
   ]
 }
